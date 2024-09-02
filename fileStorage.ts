@@ -8,10 +8,10 @@ const dataFilePath = path.join('data', 'bookings.json');
 console.log(`Json file path: ${dataFilePath}`);
 
 // Ensure the 'data' directory exists
-const directoryPath = path.dirname(dataFilePath);
-if (!fs.existsSync(directoryPath)) {
-  fs.mkdirSync(directoryPath, { recursive: true });
-}
+//const directoryPath = path.dirname(dataFilePath);
+// if (!fs.existsSync(directoryPath)) {
+//   fs.mkdirSync(directoryPath, { recursive: true });
+// }
 
 // Initialize file if it does not exist or is empty
 if (!fs.existsSync(dataFilePath)) {
