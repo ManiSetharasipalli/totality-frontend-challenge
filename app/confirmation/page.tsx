@@ -1,9 +1,10 @@
 'use client';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { properties } from '../data/MockData';
 
-const ConfirmationPage = () => {
+const ConfirmationPageContent = () => {
   const searchParams = useSearchParams();
   const bookingId = searchParams.get('bookingId');
   const [booking, setBooking] = useState<any>(null);
@@ -74,5 +75,11 @@ const ConfirmationPage = () => {
     </div>
   );
 };
+
+const ConfirmationPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ConfirmationPageContent />
+  </Suspense>
+);
 
 export default ConfirmationPage;
