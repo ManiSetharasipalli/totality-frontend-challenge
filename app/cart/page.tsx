@@ -83,15 +83,16 @@ const CartPage = () => {
   }
 
   const TotalAmt = cartTotal;
-  const formatCost = (totalCost) => {
+  const formatCost = (totalCost: number) => {
     if (totalCost >= 1000000) {
-        // Convert to millions and format to two decimal places
-        return `₹${(totalCost / 1000000).toFixed(2)} million`;
+      // Convert to millions and format to two decimal places
+      return `₹{(totalCost / 1000000)} million`;
     } else {
-        // Format with commas
-        return `₹${totalCost.toLocaleString()}`;
+      // Format with commas
+      return `₹{totalCost.toLocaleString()}`;
     }
-};
+  };
+  
 
   const formatedAmt = formatCost(TotalAmt);
 
