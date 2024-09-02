@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { HomeIcon, BuildingOfficeIcon, GlobeAltIcon, CubeIcon, HomeModernIcon, BuildingOffice2Icon } from '@heroicons/react/24/outline';
 import PropertyList from './components/PropertyLists'; // Ensure the correct import path for PropertyList
-import { properties as mockProperties } from '../data/MockData';
+import { properties as mockProperties } from '../tmp/MockData';
 
 // Define property types with available Heroicons
 const propertyTypes = [

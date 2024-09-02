@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { properties } from '../../../data/MockData';
+import { properties } from '../../../tmp/MockData';
 
 const ModifyBookingPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();

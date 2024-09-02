@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     return new Response(JSON.stringify(createdBooking), { status: 201 });
   } catch (error) {
-    console.error('Error creating booking:', error);
+    console.log(`Error creating booking: ${error}`);
     return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
   }
 }

@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1725297577868,
+    "userId": 1,
+    "propertyId": 2,
+    "startDate": "2024-09-02T00:00:00.000Z",
+    "endDate": "2024-09-19T00:00:00.000Z",
+    "totalCost": 765000,
+    "status": "Success",
+    "paymentMethod": "CreditCard"
+  }
+]

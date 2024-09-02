@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getBookingById, createBooking, updateBooking, deleteBooking } from '../../../../fileStorage'; // Adjust the import path as necessary
-import { Booking } from '../../../type'; // Adjust the import path as necessary
+import { getBookingById, createBooking, updateBooking, deleteBooking } from '../../../../fileStorage';
+import { Booking } from '../../../type';
 
 // GET method to fetch a booking by ID
 export async function GET(request: Request, { params }: { params: { id: string } }) {
@@ -26,8 +26,8 @@ export async function POST(request: Request) {
 
     // Create a new booking record
     const newBooking: Booking = {
-      id: Date.now(), // Example ID generation
-      userId: 1, // Example user ID
+      id: Date.now(),
+      userId: 1,
       propertyId: parseInt(propertyId, 10),
       startDate: new Date(startDate).toISOString(),
       endDate: new Date(endDate).toISOString(),
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     const createdBooking = createBooking(newBooking);
     return NextResponse.json(createdBooking, { status: 201 });
   } catch (error) {
-    console.error('Error creating booking:', error);
+    console.log(`Error creating booking: ${error}`);
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }

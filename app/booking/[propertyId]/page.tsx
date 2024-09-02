@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import {properties} from '../../../data/MockData'
+import {properties} from '../../../tmp/MockData'
 
 const BookingPage = ({ params }: { params: { propertyId: string } }) => {
   const router = useRouter();

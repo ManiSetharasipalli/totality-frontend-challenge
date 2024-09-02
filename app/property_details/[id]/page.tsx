@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { MapPinIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { properties } from '../../../data/MockData'; // Adjust the path to your mockData file
+import { properties } from '../../../tmp/MockData'; // Adjust the path to your mockData file
 
 interface PropertyDetailsProps {
   params: {

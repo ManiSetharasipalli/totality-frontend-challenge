@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ShoppingCartIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { properties } from '../../data/MockData';
+import { properties } from '../../tmp/MockData';
 
 interface Property {
   id: number;
