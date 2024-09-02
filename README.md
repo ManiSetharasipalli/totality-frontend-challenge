@@ -57,13 +57,11 @@ To start the development server, run:
 
 Open your browser and go to http://localhost:3000 to view the application.
 
-## Deployment
+## Deployment  
 
-The project is ready for deployment on platforms like Vercel or Netlify. To deploy: 
+The project is deployed on Vercel and can be accessed via the following link: https://totality-frontend-challenge-latest-004.vercel.app/
 
-
-
-Tech Stack
+### Tech Stack
 
     Framework: Next.js 14+
     Language: TypeScript
