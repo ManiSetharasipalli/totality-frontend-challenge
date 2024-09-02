@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import PropertieList from '../components/PropertyLists'; // Ensure this import path is correct
-import { properties } from '../data/MockData'; // Adjust the path to your mockData file
+import { properties } from '../../data/MockData'; // Adjust the path to your mockData file
 import { XCircleIcon } from '@heroicons/react/24/outline'; // Import a Heroicons icon
 
 // Utility function for sorting

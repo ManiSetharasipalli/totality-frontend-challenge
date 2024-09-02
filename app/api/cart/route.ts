@@ -1,21 +1,18 @@
-import { PrismaClient } from '@prisma/client';
+import { readData } from '../../../fileStorage'; // Adjust the path as necessary
 
-const prisma = new PrismaClient();
-
-// GET method to retrieve a booking by ID
+// GET method to retrieve all bookings
 export async function GET(request: Request) {
-
-
   try {
-    const booking = await prisma.booking.findMany();
+    // Retrieve all bookings from the file
+    const bookings = readData();
 
-    if (!booking) {
-      return new Response(JSON.stringify({ message: 'Booking not found' }), { status: 404 });
+    if (bookings.length === 0) {
+      return new Response(JSON.stringify({ message: 'No bookings found' }), { status: 404 });
     }
 
-    return new Response(JSON.stringify(booking), { status: 200 });
+    return new Response(JSON.stringify(bookings), { status: 200 });
   } catch (error) {
-    console.error('Error fetching booking:', error);
+    console.error('Error fetching bookings:', error);
     return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
   }
 }

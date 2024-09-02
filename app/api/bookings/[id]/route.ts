@@ -1,94 +1,78 @@
-import { PrismaClient } from '@prisma/client';
+import { NextResponse } from 'next/server';
+import { getBookingById, createBooking, updateBooking, deleteBooking } from '../../../../fileStorage'; // Adjust the import path as necessary
+import { Booking } from '../../../type'; // Adjust the import path as necessary
 
-const prisma = new PrismaClient();
-
-// GET method to retrieve a booking by ID
+// GET method to fetch a booking by ID
 export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
-
-  if (isNaN(id)) {
-    return new Response(JSON.stringify({ message: 'Invalid booking ID' }), { status: 400 });
-  }
-
   try {
-    const booking = await prisma.booking.findUnique({
-      where: { id: id }
-    });
-
-    if (!booking) {
-      return new Response(JSON.stringify({ message: 'Booking not found' }), { status: 404 });
+    const id = parseInt(params.id, 10);
+    const booking = getBookingById(id);
+    if (booking) {
+      return NextResponse.json(booking);
+    } else {
+      return NextResponse.json({ message: 'Booking not found' }, { status: 404 });
     }
-
-    return new Response(JSON.stringify(booking), { status: 200 });
   } catch (error) {
     console.error('Error fetching booking:', error);
-    return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
 
-// PATCH method to update booking details
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
-
-  if (isNaN(id)) {
-    return new Response(JSON.stringify({ message: 'Invalid booking ID' }), { status: 400 });
-  }
-
+// POST method to create a new booking
+export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { startDate, endDate, totalCost, paymentMethod } = body;
+    const { propertyId, startDate, endDate, totalCost, paymentMethod } = body;
 
-    // Validate input data
-    if (!startDate || !endDate || !totalCost || !paymentMethod) {
-      return new Response(JSON.stringify({ message: 'Missing required fields' }), { status: 400 });
+    // Create a new booking record
+    const newBooking: Booking = {
+      id: Date.now(), // Example ID generation
+      userId: 1, // Example user ID
+      propertyId: parseInt(propertyId, 10),
+      startDate: new Date(startDate).toISOString(),
+      endDate: new Date(endDate).toISOString(),
+      totalCost: parseFloat(totalCost),
+      status: 'Success',
+      paymentMethod,
+    };
+
+    const createdBooking = createBooking(newBooking);
+    return NextResponse.json(createdBooking, { status: 201 });
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+  }
+}
+
+// PUT method to update an existing booking
+export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+  try {
+    const id = parseInt(params.id, 10);
+    const body = await request.json();
+    const updatedBooking = updateBooking(id, body);
+    if (updatedBooking) {
+      return NextResponse.json(updatedBooking);
+    } else {
+      return NextResponse.json({ message: 'Booking not found' }, { status: 404 });
     }
-
-    // Update booking record
-    const updatedBooking = await prisma.booking.update({
-      where: { id: id },
-      data: {
-        startDate: new Date(startDate),
-        endDate: new Date(endDate),
-        totalCost: parseFloat(totalCost),
-        paymentMethod,
-      },
-    });
-
-    return new Response(JSON.stringify(updatedBooking), { status: 200 });
   } catch (error) {
     console.error('Error updating booking:', error);
-    return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
 
-
-// DELETE method to remove a booking by ID
+// DELETE method to delete a booking
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-  const id = parseInt(params.id, 10);
-
-  if (isNaN(id)) {
-    return new Response(JSON.stringify({ message: 'Invalid booking ID' }), { status: 400 });
-  }
-
   try {
-    // Check if booking exists
-    const existingBooking = await prisma.booking.findUnique({
-      where: { id: id },
-    });
-
-    if (!existingBooking) {
-      return new Response(JSON.stringify({ message: 'Booking not found' }), { status: 404 });
+    const id = parseInt(params.id, 10);
+    const success = deleteBooking(id);
+    if (success) {
+      return NextResponse.json({ message: 'Booking deleted' });
+    } else {
+      return NextResponse.json({ message: 'Booking not found' }, { status: 404 });
     }
-
-    // Delete the booking
-    await prisma.booking.delete({
-      where: { id: id },
-    });
-
-    return new Response(JSON.stringify({ message: 'Booking deleted successfully' }), { status: 200 });
   } catch (error) {
     console.error('Error deleting booking:', error);
-    return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
-

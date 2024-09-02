@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { properties } from '../data/MockData';
+import { properties } from '../../data/MockData';
 
 const ConfirmationPageContent = () => {
   const searchParams = useSearchParams();

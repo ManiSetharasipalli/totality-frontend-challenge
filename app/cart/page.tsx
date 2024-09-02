@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ShoppingCartIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { properties } from '../data/MockData';
+import { properties } from '../../data/MockData';
 
 interface Property {
   id: number;
@@ -13,7 +13,7 @@ interface Property {
 
 interface Booking {
   id: number;
-  propertyId: number; // Changed to propertyId for mapping
+  propertyId: number;
   startDate: string;
   endDate: string;
   totalCost: number;
@@ -36,8 +36,14 @@ const CartPage = () => {
       try {
         const response = await fetch('/api/cart');
         const data = await response.json();
-        setBookings(data);
-        calculateCartTotal(data);
+        
+        // Ensure the data is an array
+        if (Array.isArray(data)) {
+          setBookings(data);
+          calculateCartTotal(data);
+        } else {
+          console.error('Expected an array but received:', data);
+        }
       } catch (error) {
         console.error('Error fetching bookings:', error);
       } finally {
@@ -86,13 +92,11 @@ const CartPage = () => {
   const formatCost = (totalCost: number) => {
     if (totalCost >= 1000000) {
       // Convert to millions and format to two decimal places
-      return `₹${(totalCost / 1000000)} million`;
+      return `₹${(totalCost / 1000000).toFixed(2)} million`;
     } else {
-      
       return `₹${totalCost.toLocaleString()}`;
     }
   };
-  
 
   const formatedAmt = formatCost(TotalAmt);
 
@@ -118,10 +122,9 @@ const CartPage = () => {
           if (!property) {
             return null; // Skip if property not found
           }
-          
-        const totalCost = booking.totalCost;
-        const formattedCost = formatCost(totalCost);
-        
+
+          const totalCost = booking.totalCost;
+          const formattedCost = formatCost(totalCost);
 
           return (
             <div key={booking.id} className="border p-4 rounded-lg shadow-lg flex flex-col items-center bg-white">
