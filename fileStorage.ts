@@ -3,7 +3,7 @@ import path from 'path';
 import { Booking } from './app/type'; // Adjust the path as necessary
 
 
-const dataFilePath = path.join('tmp', 'bookings.json');
+const dataFilePath = path.join('./tmp', 'bookings.json');
 
 console.log(`Json file path: ${dataFilePath}`);
 
