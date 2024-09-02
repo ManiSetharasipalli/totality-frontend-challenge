@@ -1,15 +1,13 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import {properties} from '../data/MockData'
+import { properties } from '../data/MockData';
 
 const ConfirmationPage = () => {
   const searchParams = useSearchParams();
   const bookingId = searchParams.get('bookingId');
   const [booking, setBooking] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  
-
 
   useEffect(() => {
     if (bookingId) {
@@ -42,6 +40,10 @@ const ConfirmationPage = () => {
 
   const propertyId = booking.propertyId;
   const property = properties.find(prop => prop.id === propertyId);
+
+  if (!property) {
+    return <div className="p-32">Property not found</div>;
+  }
 
   const calculateNumberOfDays = (startDate: string, endDate: string) => {
     const start = new Date(startDate);

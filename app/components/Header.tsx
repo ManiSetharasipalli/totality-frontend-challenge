@@ -4,10 +4,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AdjustmentsHorizontalIcon, ShoppingCartIcon } from '@heroicons/react/24/outline'; // Import ShoppingCartIcon
-import { useRouter } from 'next/navigation';
 
 const Header = () => {
-  const router = useRouter();
 
   return (
     <div className='p-5 flex justify-between items-center shadow-sm bg-white fixed w-full z-50'>
