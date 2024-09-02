@@ -3,7 +3,9 @@ import path from 'path';
 import { Booking } from './app/type'; // Adjust the path as necessary
 
 
-const dataFilePath = path.join(process.cwd(), 'data', 'bookings.json');
+const dataFilePath = path.join('data', 'bookings.json');
+
+console.log(`Json file path: ${dataFilePath}`);
 
 // Ensure the 'data' directory exists
 const directoryPath = path.dirname(dataFilePath);

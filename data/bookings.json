@@ -1,12 +1,1 @@
-[
-  {
-    "id": 1725287950248,
-    "userId": 1,
-    "propertyId": 1,
-    "startDate": "2024-09-02T00:00:00.000Z",
-    "endDate": "2024-09-12T00:00:00.000Z",
-    "totalCost": 750000,
-    "status": "Success",
-    "paymentMethod": "PhonePay"
-  }
-]
+[]
