@@ -1,6 +1,6 @@
 datasource db {
   provider = "mysql"
-  url      = "DATABASE_URL"
+  url      = "mysql://root:piUaZrxodJJbVWUMASJpLSDPDVhpCqRi@junction.proxy.rlwy.net:14746/railway"
 }
 
 generator client {
